@@ -11,7 +11,7 @@ struct LassoControls: View {
                     session.cancelLasso()
                     session.marqueeKind = kind
                 })) {
-                    ForEach(LassoKind.marqueeChoices, id: \.self) { Text($0.rawValue).tag($0) }
+                    ForEach(LassoKind.marqueeChoices, id: \.self) { Text($0.localizedName).tag($0) }
                 }
                 .pickerStyle(.segmented).labelsHidden().fixedSize()
                 .help("Press M to switch between Rectangle and Ellipse")
@@ -21,7 +21,7 @@ struct LassoControls: View {
                     session.cancelLasso()
                     session.wandMode = mode
                 })) {
-                    ForEach(WandMode.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+                    ForEach(WandMode.allCases, id: \.self) { Text($0.localizedName).tag($0) }
                 }
                 .pickerStyle(.segmented).labelsHidden().fixedSize()
                 .help("Press Tab to switch between Wand and Object")
@@ -31,7 +31,7 @@ struct LassoControls: View {
                     session.cancelLasso()
                     session.lassoKind = kind
                 })) {
-                    ForEach(LassoKind.lassoChoices, id: \.self) { Text($0.rawValue).tag($0) }
+                    ForEach(LassoKind.lassoChoices, id: \.self) { Text($0.localizedName).tag($0) }
                 }
                 .pickerStyle(.segmented).labelsHidden().fixedSize()
                 .help("Press L to switch between Freehand and Polygonal")
@@ -39,7 +39,7 @@ struct LassoControls: View {
             // Shows held Shift/Option (or an outline's mode) live; clicking sets the choice.
             Picker("Mode", selection: Binding(get: { session.displayedSelectionMode },
                                               set: { session.selectionModeChoice = $0 })) {
-                ForEach(SelectionMode.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+                ForEach(SelectionMode.allCases, id: \.self) { Text($0.localizedName).tag($0) }
             }
             .pickerStyle(.segmented).labelsHidden().fixedSize()
             .help("Hold Shift to add or Option to subtract for one outline")
@@ -141,7 +141,7 @@ struct LassoControls: View {
     private func modifyControl(_ title: String, amount: Binding<Int>, action: @escaping () -> Void) -> some View {
         HStack(spacing: 5) {
             Button(title, action: action)
-            TextField(title, value: Binding(get: { amount.wrappedValue },
+            TextField(title.localized, value: Binding(get: { amount.wrappedValue },
                                             set: { amount.wrappedValue = min(500, max(1, $0)) }),
                       format: .number)
                 .frame(width: 40).textFieldStyle(.roundedBorder)
@@ -151,7 +151,7 @@ struct LassoControls: View {
                 .unitSuffix("px", scrubValue: amount, sensitivity: 1, range: 1...500)
         }
         .disabled(!session.canModifySelection)
-        .help("\(title) the selection by this many pixels")
+        .help("\(title.localized) the selection by this many pixels")
     }
 }
 
