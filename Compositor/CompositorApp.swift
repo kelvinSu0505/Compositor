@@ -191,7 +191,7 @@ struct CompositorApp: App {
                 }
                 CommandGroup(after: .pasteboard) {
                     Divider()
-                    Button("Keyboard Shortcuts…") { ShortcutSettings.shared.show() }
+                    KeyboardShortcutsMenuItem()
                     // Photoshop's fill shortcuts; in a text field they keep their text meaning.
                     Button("Fill with Foreground Color") {
                         if NSApp.keyWindow?.firstResponder is NSTextView {
@@ -343,5 +343,6 @@ struct CompositorApp: App {
                         .disabled(!session.canEditLayers || session.activeLayer == nil)
                 }
             }
+        Settings { SettingsView(applicationDelegate: applicationDelegate) }
     }
 }

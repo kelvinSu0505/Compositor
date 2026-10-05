@@ -50,8 +50,23 @@ final class CompositorApplicationDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         // What's still open (a dialog, a gradient waiting for Apply) is settled by confirmQuit, which beeps if
         // something, a save still running say, has to finish first.
-        guard !workspace.isManaging else { return .terminateCancel }
-        Task { sender.reply(toApplicationShouldTerminate: await workspace.confirmQuit()) }
+        guard !workspace.isManaging else { relaunchesAfterQuit = false; return .terminateCancel }
+        Task {
+            let confirmed = await workspace.confirmQuit()
+            if !confirmed { relaunchesAfterQuit = false }
+            sender.reply(toApplicationShouldTerminate: confirmed)
+        }
         return .terminateLater
+    }
+
+    /// Set by Settings after a language change; a quit that's cancelled (Cancel in a save prompt) clears it.
+    var relaunchesAfterQuit = false
+
+    func applicationWillTerminate(_ notification: Notification) {
+        guard relaunchesAfterQuit else { return }
+        let open = Process()
+        open.executableURL = URL(fileURLWithPath: "/usr/bin/open")
+        open.arguments = ["-n", Bundle.main.bundlePath]
+        try? open.run()
     }
 }

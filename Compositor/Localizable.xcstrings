@@ -6813,6 +6813,22 @@
         }
       }
     },
+    "General" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通用"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一般"
+          }
+        }
+      }
+    },
     "Geometry" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8819,6 +8835,22 @@
         }
       }
     },
+    "Language" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "语言"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "語言"
+          }
+        }
+      }
+    },
     "Lasso" : {
       "localizations" : {
         "zh-Hans" : {
@@ -8865,6 +8897,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "套索/切換模式"
+          }
+        }
+      }
+    },
+    "Later" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "稍后"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "稍後"
           }
         }
       }
@@ -10438,6 +10486,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "選單"
+          }
+        }
+      }
+    },
+    "Menus and controls use this language after Compositor restarts. It’s the same setting as System Settings › General › Language & Region › Applications." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新启动 Compositor 后，菜单和控件会使用此语言。它与“系统设置 › 通用 › 语言与地区 › 应用程序”中的设置相同。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新啟動 Compositor 後，選單和控制項會使用此語言。它與「系統設定 › 一般 › 語言與地區 › 應用程式」中的設定相同。"
           }
         }
       }
@@ -13956,6 +14020,38 @@
         }
       }
     },
+    "Restart Compositor to use the new language?" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "要重新启动 Compositor 以使用新语言吗？"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "要重新啟動 Compositor 以使用新語言嗎？"
+          }
+        }
+      }
+    },
+    "Restart Now" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "立即重新启动"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "立即重新啟動"
+          }
+        }
+      }
+    },
     "Restore Defaults" : {
       "localizations" : {
         "zh-Hans" : {
@@ -16165,6 +16261,22 @@
         }
       }
     },
+    "System Default" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跟随系统"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "依照系統"
+          }
+        }
+      }
+    },
     "Tab" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -18155,6 +18267,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "如果不儲存，你的更改將會丟失。"
+          }
+        }
+      }
+    },
+    "You’ll be asked to save any unsaved changes first." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如有未存储的更改，会先询问你是否存储。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如有未儲存的變更，會先詢問你是否儲存。"
           }
         }
       }

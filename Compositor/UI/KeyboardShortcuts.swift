@@ -131,7 +131,6 @@ struct ShortcutDefinition: Identifiable {
 final class ShortcutSettings {
     static let shared = ShortcutSettings()
     private(set) var overrides: [String: ShortcutChord] = [:]
-    @ObservationIgnored private let panel = FloatingPanelController(name: "keyboardShortcuts")
     private static let storageKey = "keyboardShortcuts.v1"
     private init() {
         if let data = UserDefaults.standard.data(forKey: Self.storageKey),
@@ -153,15 +152,10 @@ final class ShortcutSettings {
         guard let definition = ShortcutDefinition.all.first(where: { !$0.isMenu && $0.original == original }) else { return original }
         return chord(definition)
     }
-    func show() {
-        panel.show(title: "Keyboard Shortcuts", content: KeyboardShortcutsSheet(settings: self))
-    }
-    func close() { panel.close() }
     func save(_ values: [String: ShortcutChord]) {
         guard Self.problem(in: values) == nil, let data = try? JSONEncoder().encode(values) else { return }
         overrides = values
         UserDefaults.standard.set(data, forKey: Self.storageKey)
-        close()
     }
     static func problem(in values: [String: ShortcutChord]) -> String? {
         var assigned: [ShortcutChord: String] = [:]
@@ -226,7 +220,8 @@ extension View {
     }
 }
 
-private struct KeyboardShortcutsSheet: View {
+/// The Keyboard Shortcuts tab of Settings. Edits stay a draft until Save; Cancel drops them.
+struct KeyboardShortcutsSheet: View {
     let settings: ShortcutSettings
     @State private var draft: [String: ShortcutChord]
     @State private var search = ""
@@ -273,10 +268,11 @@ private struct KeyboardShortcutsSheet: View {
             HStack {
                 Button("Restore Defaults") { recording = nil; draft = [:] }
                 Spacer()
-                Button("Cancel") { settings.close() }.keyboardShortcut(.cancelAction)
+                Button("Cancel") { recording = nil; draft = settings.overrides }.keyboardShortcut(.cancelAction)
+                    .disabled(draft == settings.overrides)
                 Button("Save") { settings.save(draft) }.keyboardShortcut(.defaultAction)
                     .buttonStyle(.borderedProminent)
-                    .disabled(recording != nil || ShortcutSettings.problem(in: draft) != nil)
+                    .disabled(recording != nil || draft == settings.overrides || ShortcutSettings.problem(in: draft) != nil)
             }
         }.padding(24).frame(width: 660).fixedSize()
     }
